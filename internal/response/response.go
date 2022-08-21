@@ -32,9 +32,9 @@ func (b Builder) HandleUserMessage(chatID, fromID int64, message *tgbotapi.Messa
 	action, _ := b.actionService.GetLastAction(chatID)
 
 	switch action {
-	case sendInstaButtonText:
+	case SendInstaButtonText:
 		return b.SaveInstaResponse(chatID, message.Text)
-	case reviewInstaButtonText:
+	case ReviewInstaButtonText:
 		return b.SaveInstaReviewResponse(chatID, message.Text) // insta reviewed id?
 	default:
 		return tgbotapi.NewMessage(chatID, b.DefaultMessage(chatID, message.Chat.FirstName))

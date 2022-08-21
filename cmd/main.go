@@ -9,6 +9,7 @@ import (
 	"github.com/jackc/pgx/v4"
 	"github.com/joho/godotenv"
 
+	factory "github.com/SolidShake/photo-critic-bot/internal/factory"
 	actionRepository "github.com/SolidShake/photo-critic-bot/internal/repository/action"
 	linkRepository "github.com/SolidShake/photo-critic-bot/internal/repository/link"
 	"github.com/SolidShake/photo-critic-bot/internal/response"
@@ -44,7 +45,7 @@ func main() {
 	updateConfig := tgbotapi.NewUpdate(0)
 	updates := bot.GetUpdatesChan(updateConfig)
 
-	factory := response.NewFactory(
+	factory := factory.NewFactory(
 		response.NewBuilder(
 			actionService.NewActionService(
 				actionRepository.NewRepository(conn),

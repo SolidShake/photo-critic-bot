@@ -5,13 +5,13 @@ import (
 )
 
 const (
-	sendInstaButtonText   = "Отправить свой Instagram на оценку"
-	reviewInstaButtonText = "Оценить чужой Instagram"
+	SendInstaButtonText   = "Отправить свой Instagram на оценку"
+	ReviewInstaButtonText = "Оценить чужой Instagram"
 )
 
-var keyboard = tgbotapi.NewReplyKeyboard(
+var Keyboard = tgbotapi.NewReplyKeyboard(
 	tgbotapi.NewKeyboardButtonRow(
-		tgbotapi.NewKeyboardButton(sendInstaButtonText),
-		tgbotapi.NewKeyboardButton(reviewInstaButtonText),
+		tgbotapi.NewKeyboardButton(SendInstaButtonText),
+		tgbotapi.NewKeyboardButton(ReviewInstaButtonText),
 	),
 )
