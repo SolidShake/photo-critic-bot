@@ -86,12 +86,12 @@ func main() {
 }
 
 func sendInstagramButton(chatID, fromID int64, message string) tgbotapi.MessageConfig {
-	saveAction(chatID, fromID, message)
+	_ = saveAction(chatID, fromID, message)
 	return tgbotapi.NewMessage(chatID, "Отправь мне ссылку на свой Instagram \nМожно скопировать ее прямо из своего профиля")
 }
 
 func sendReviewInstagramButton(chatID, fromID int64, message string) tgbotapi.MessageConfig {
-	saveAction(chatID, fromID, message)
+	_ = saveAction(chatID, fromID, message)
 	// @TODO get instagram link
 	return tgbotapi.NewMessage(chatID, "Instagram на оценку: instagram.com/sofya.khvorostova/ \n\nВведите своё ревью профиля:")
 }
@@ -123,13 +123,13 @@ func saveInstaResponse(chatID int64, message string) tgbotapi.MessageConfig {
 	}
 
 	// @TODO change desc
-	saveAction(chatID, chatID, "default action")
+	_ = saveAction(chatID, chatID, "default action")
 	return tgbotapi.NewMessage(chatID, "Ссылка сохранена")
 }
 
 func saveInstaReviewResponse(chatID int64, message string) tgbotapi.MessageConfig {
 	// @TODO change desc
-	saveAction(chatID, chatID, "default action")
+	_ = saveAction(chatID, chatID, "default action")
 	return tgbotapi.NewMessage(chatID, "Спасибо за ревью! 💖 Ревью сохранено")
 }
 
