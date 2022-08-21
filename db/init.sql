@@ -1,0 +1,27 @@
+CREATE DATABASE bot_db;
+
+\c bot_db;
+
+CREATE TABLE actions (
+    id SERIAL PRIMARY KEY,
+    chat_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    action VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+CREATE TABLE links (
+    id SERIAL PRIMARY KEY,
+    chat_id INTEGER NOT NULL,
+    link VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+CREATE TABLE reviews (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    link_id INTEGER NOT NULL,
+    review TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    FOREIGN KEY (link_id) REFERENCES links (id)
+);
