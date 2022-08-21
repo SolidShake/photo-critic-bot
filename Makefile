@@ -2,7 +2,7 @@ build:
 	go build -o ./out/photo-critic-bot
 
 run:
-	go run .
+	go run ./cmd/main.go
 
 lint:
 	golangci-lint run
