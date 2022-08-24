@@ -11,21 +11,22 @@ import (
 
 	factory "github.com/SolidShake/photo-critic-bot/internal/factory"
 	actionRepository "github.com/SolidShake/photo-critic-bot/internal/repository/action"
-	linkRepository "github.com/SolidShake/photo-critic-bot/internal/repository/link"
+	chatRepository "github.com/SolidShake/photo-critic-bot/internal/repository/chat"
+	reviewRepository "github.com/SolidShake/photo-critic-bot/internal/repository/review"
 	"github.com/SolidShake/photo-critic-bot/internal/response"
 	actionService "github.com/SolidShake/photo-critic-bot/internal/service/action"
-	linkService "github.com/SolidShake/photo-critic-bot/internal/service/link"
+	chatService "github.com/SolidShake/photo-critic-bot/internal/service/chat"
+	reviewService "github.com/SolidShake/photo-critic-bot/internal/service/review"
 )
 
-var conn *pgx.Conn
-
+// @TODO добавить проверку на добавление инициализируего профиля
 func main() {
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("error loading .env file")
 	}
 
-	conn, err = pgx.Connect(context.Background(), os.Getenv("DB_HOST"))
+	conn, err := pgx.Connect(context.Background(), os.Getenv("DB_HOST"))
 	if err != nil {
 		log.Fatalf("cannot connect to database: %s", err)
 	}
@@ -47,11 +48,14 @@ func main() {
 
 	factory := factory.NewFactory(
 		response.NewBuilder(
-			actionService.NewActionService(
+			actionService.NewService(
 				actionRepository.NewRepository(conn),
 			),
-			linkService.NewLinkService(
-				linkRepository.NewRepository(conn),
+			chatService.NewService(
+				chatRepository.NewRepository(conn),
+			),
+			reviewService.NewService(
+				reviewRepository.NewRepository(conn),
 			),
 		),
 	)
